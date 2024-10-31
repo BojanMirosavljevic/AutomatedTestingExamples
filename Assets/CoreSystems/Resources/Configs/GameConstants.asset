@@ -1,0 +1,158 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a8ad83eb54774b4aa5bf8d7e747fcbc, type: 3}
+  m_Name: GameConstants
+  m_EditorClassIdentifier: 
+  GameFps: 60
+  ExperienceRequirements:
+  - Level: 1
+    StarsRequired: 0
+    StarsToCollect: 3
+  - Level: 2
+    StarsRequired: 3
+    StarsToCollect: 6
+  - Level: 3
+    StarsRequired: 9
+    StarsToCollect: 9
+  - Level: 4
+    StarsRequired: 18
+    StarsToCollect: 12
+  - Level: 5
+    StarsRequired: 30
+    StarsToCollect: 24
+  - Level: 6
+    StarsRequired: 54
+    StarsToCollect: 36
+  - Level: 7
+    StarsRequired: 90
+    StarsToCollect: 45
+  - Level: 8
+    StarsRequired: 135
+    StarsToCollect: 60
+  - Level: 9
+    StarsRequired: 195
+    StarsToCollect: 75
+  - Level: 10
+    StarsRequired: 270
+    StarsToCollect: 90
+  - Level: 11
+    StarsRequired: 360
+    StarsToCollect: 0
+  ExperienceRewards:
+  - Items:
+    - Type: 0
+      Amount: 500
+    - Type: 11
+      Amount: 3
+  - Items:
+    - Type: 0
+      Amount: 750
+    - Type: 1
+      Amount: 10
+  - Items:
+    - Type: 0
+      Amount: 1000
+    - Type: 12
+      Amount: 3
+  - Items:
+    - Type: 0
+      Amount: 1500
+    - Type: 11
+      Amount: 3
+    - Type: 12
+      Amount: 3
+  - Items:
+    - Type: 0
+      Amount: 2000
+    - Type: 1
+      Amount: 20
+  - Items:
+    - Type: 0
+      Amount: 2500
+    - Type: 11
+      Amount: 5
+    - Type: 12
+      Amount: 5
+  - Items:
+    - Type: 0
+      Amount: 3000
+    - Type: 11
+      Amount: 5
+    - Type: 12
+      Amount: 5
+  - Items:
+    - Type: 0
+      Amount: 4000
+    - Type: 11
+      Amount: 5
+    - Type: 12
+      Amount: 5
+  - Items:
+    - Type: 0
+      Amount: 5000
+    - Type: 11
+      Amount: 5
+    - Type: 12
+      Amount: 5
+  - Items:
+    - Type: 0
+      Amount: 10000
+    - Type: 11
+      Amount: 10
+    - Type: 12
+      Amount: 10
+  RewardImages:
+  - {fileID: 21300000, guid: 1ba2eb565097a4d479ae5de8725a4187, type: 3}
+  - {fileID: 21300000, guid: 63c12e1e1f846b24497fe0ba0ed35c91, type: 3}
+  - {fileID: 21300000, guid: e7be5307f6a1b594eb3bb24f7dd76477, type: 3}
+  - {fileID: 21300000, guid: fd91edda8f3075844ae90f742945d61f, type: 3}
+  TileColors:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0.5, b: 1, a: 1}
+  - {r: 0.94718194, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0.61552286, b: 0, a: 1}
+  - {r: 0.617486, g: 0, b: 1, a: 1}
+  AlternateColors:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0.2509804, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0.2509804, a: 1}
+  - {r: 0, g: 0.2509804, b: 1, a: 1}
+  - {r: 0, g: 0.9960785, b: 0.7490196, a: 1}
+  - {r: 1, g: 0.7490196, b: 0, a: 1}
+  - {r: 0.7490196, g: 0, b: 1, a: 1}
+  AccessColors:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0.61960787, b: 0.45098042, a: 1}
+  - {r: 0.8352942, g: 0.36862746, b: 0, a: 1}
+  - {r: 0.3372549, g: 0.7058824, b: 0.91372555, a: 1}
+  - {r: 0.94117653, g: 0.8941177, b: 0.25882354, a: 1}
+  - {r: 0.73333335, g: 0.73333335, b: 0.73333335, a: 1}
+  - {r: 0.8000001, g: 0.47450984, b: 0.654902, a: 1}
+  ShapesEmpty:
+  - {fileID: 21300000, guid: 2585151f7c2ef1548861ed424020608e, type: 3}
+  - {fileID: 21300000, guid: f21f92be5ae14044ca71c6431266f1cd, type: 3}
+  - {fileID: 21300000, guid: b1d9ecc6eeb9f6a40addcd405d5ce949, type: 3}
+  - {fileID: 21300000, guid: 1898af5e8fee79e47a0759b56898ef41, type: 3}
+  ShapesFill:
+  - {fileID: 21300000, guid: fa39e38392d081e4e91500377078940e, type: 3}
+  - {fileID: 21300000, guid: 1a34823432042ff46b8a03112b8ad2e9, type: 3}
+  - {fileID: 21300000, guid: 0625c7837c64cd04883e099e01077ed4, type: 3}
+  - {fileID: 21300000, guid: 2c7ea260af2e8cb478fabafada70aa6c, type: 3}
+  ShapesFull:
+  - {fileID: 21300000, guid: fe99ffff73630d04c9e3f3b9ce106ab2, type: 3}
+  - {fileID: 21300000, guid: b74fd5a34ba7da849a2a6602bd13880f, type: 3}
+  - {fileID: 21300000, guid: 55a6cb06ff287e54aa9bd39fd98a9f94, type: 3}
+  - {fileID: 21300000, guid: dcce2b0c9c4690a4990b67c3ccfc187b, type: 3}
+  TutorialLinePrefab: {fileID: 555436079582018610, guid: 8a9e42e432c9b8444970d2d864f7b439, type: 3}
+  TutorialTapPrefab: {fileID: 4372962638202794630, guid: 9caa6656222c07040a4cd0587779ba67, type: 3}
