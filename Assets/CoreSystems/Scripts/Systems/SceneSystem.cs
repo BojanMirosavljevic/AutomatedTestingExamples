@@ -65,7 +65,7 @@ public class SceneSystem : PersistentSingleton<SceneSystem>
 
             while (timePassed < duration)
             {
-                timePassed += Time.deltaTime;
+                timePassed += Time.unscaledDeltaTime;
 
                 blackFaderCanvas.alpha = Mathf.Lerp(startAlpha, endAlpha, timePassed / duration);
                 yield return new WaitForEndOfFrame();
@@ -81,6 +81,6 @@ public class SceneSystem : PersistentSingleton<SceneSystem>
 public enum Scene
 {
     None = -1,
-    Loading = 0,
+    Menu = 0,
     Game = 1
 }

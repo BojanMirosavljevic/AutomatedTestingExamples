@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class GameSystem : PersistentSingleton<GameSystem>
 {
+    public LevelConfig LoadedLevelConfig;
+
     protected override void Awake()
     {
         base.Awake();
@@ -14,7 +16,7 @@ public class GameSystem : PersistentSingleton<GameSystem>
 
     public void RunLevel(int level)
     {
-        LevelConfig config = Resources.Load<LevelConfig>("Levels/Level"+level);
+        LoadedLevelConfig = Resources.Load<LevelConfig>("Levels/Level"+level);
         SceneSystem.Instance.LoadScene(Scene.Game);
     }
 }

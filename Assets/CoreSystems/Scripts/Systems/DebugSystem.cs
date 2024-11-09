@@ -142,7 +142,7 @@ public class DebugSystem : PersistentSingleton<DebugSystem>
             {
                 Debug.LogError("Button loading clicked");
             },
-            sceneOnly: Scene.Loading
+            sceneOnly: Scene.Menu
         );
 
         AddButton(

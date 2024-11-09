@@ -20,3 +20,9 @@ public class GameConstants : ScriptableObject
 
     #endregion
 }
+
+public enum EnemyType
+{
+    Ghoul = 1,
+    Abomination = 2,
+}

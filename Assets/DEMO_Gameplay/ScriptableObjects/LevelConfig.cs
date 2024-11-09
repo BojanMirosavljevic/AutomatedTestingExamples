@@ -5,9 +5,11 @@ public class LevelConfig : ScriptableObject
 {
     #region Level settings
     [Header("Level settings")]
-    public int ZombiesCount;
-    public int AbominationCount;
+    public int WavesCount;
+    public int SpawnAmountMin;
+    public int SpawnAmountMax;
     public float SpawnTimeMin;
     public float SpawnTimeMax;
+    public int AbominationFrequency;
     #endregion
 }
