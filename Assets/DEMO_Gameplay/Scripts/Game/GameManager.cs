@@ -98,8 +98,11 @@ public class GameManager : StaticInstance<GameManager>
 
     public void StartEndGameFlow()
     {
-        Time.timeScale = 0f;
-        GameEndedUI.SetActive(true);
+        if (!gameEnded)
+        {
+            Time.timeScale = 0f;
+            GameEndedUI.SetActive(true);
+        }
     }
 
     public void GoToMenu()

@@ -74,4 +74,12 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
     }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.tag == "Enemy")
+        {
+            GameManager.Instance.StartEndGameFlow();
+        }
+    }
 }
