@@ -59,14 +59,14 @@ public class GameManager : StaticInstance<GameManager>
 
         int randomizedSpawnAmount = Random.Range(GameSystem.Instance.LoadedLevelConfig.SpawnAmountMin, GameSystem.Instance.LoadedLevelConfig.SpawnAmountMax);
 
-        List<int> spawnPointIndexes = new List<int>() { 0, 1, 2, 3 };
+        List<int> spawnPointIndexes = new List<int>() { 0, 1, 2, 3, 4, 5 };
 
         //check spawn abomination
         if (GameSystem.Instance.LoadedLevelConfig.AbominationFrequency > 0 &&
             waveCount % GameSystem.Instance.LoadedLevelConfig.AbominationFrequency == 0)
         {
-            int spawnIndex = spawnPointIndexes[Random.Range(0, spawnPointIndexes.Count)];
-            SpawnPoints[spawnIndex].SpawnEnemy(EnemyType.Abomination);
+            int spawnIndex = Random.Range(0, spawnPointIndexes.Count);
+            SpawnPoints[spawnPointIndexes[spawnIndex]].SpawnEnemy(EnemyType.Abomination);
             spawnPointIndexes.RemoveAt(spawnIndex);
 
             enemiesCount++;
@@ -76,8 +76,8 @@ public class GameManager : StaticInstance<GameManager>
         //spawn ghouls
         for (int i = 0; i < randomizedSpawnAmount; i++)
         {
-            int spawnIndex = spawnPointIndexes[Random.Range(0, spawnPointIndexes.Count)];
-            SpawnPoints[spawnIndex].SpawnEnemy(EnemyType.Ghoul);
+            int spawnIndex = Random.Range(0, spawnPointIndexes.Count);
+            SpawnPoints[spawnPointIndexes[spawnIndex]].SpawnEnemy(EnemyType.Ghoul);
             spawnPointIndexes.RemoveAt(spawnIndex);
 
             enemiesCount++;
@@ -90,7 +90,6 @@ public class GameManager : StaticInstance<GameManager>
 
         if (enemiesCount == 0 && waveCount == GameSystem.Instance.LoadedLevelConfig.WavesCount)
         {
-            gameEnded = true;
             GameWon = true;
             StartEndGameFlow();
         }
@@ -100,6 +99,7 @@ public class GameManager : StaticInstance<GameManager>
     {
         if (!gameEnded)
         {
+            gameEnded = true;
             Time.timeScale = 0f;
             GameEndedUI.SetActive(true);
         }

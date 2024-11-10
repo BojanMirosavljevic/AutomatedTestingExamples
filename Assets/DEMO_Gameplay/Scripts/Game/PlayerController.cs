@@ -75,9 +75,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.tag == "Enemy")
+        if (col.transform.CompareTag("Enemy"))
         {
             GameManager.Instance.StartEndGameFlow();
         }
