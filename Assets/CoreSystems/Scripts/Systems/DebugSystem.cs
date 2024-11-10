@@ -46,11 +46,13 @@ public class DebugSystem : PersistentSingleton<DebugSystem>
     {
         StartCoroutine(ClearButtons());
         MainWindow.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void CloseMainWindow()
     {
         MainWindow.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     public void ToggleMainWindow()
@@ -125,5 +127,29 @@ public class DebugSystem : PersistentSingleton<DebugSystem>
 
     private void SetupButtons()
     {
+        AddButton(
+            "Set Last Wave",
+            () =>
+            {
+                GameManager.Instance.WaveCount = GameSystem.Instance.LoadedLevelConfig.WavesCount;
+                GameManager.Instance.SetRandomizedTimeToSpawn();
+                GameManager.Instance.SetLevelProgressText();
+
+                if (GameManager.Instance.EnemiesCount == 0)
+                {
+                    GameManager.Instance.StartEndGameFlow();
+                }
+            },
+            sceneOnly: Scene.Game
+        );
+        
+        AddButton(
+            "Pass level",
+            () =>
+            {
+                GameManager.Instance.StartEndGameFlow();
+            },
+            sceneOnly: Scene.Game
+        );
     }
 }

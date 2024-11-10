@@ -14,8 +14,8 @@ public class GameManager : StaticInstance<GameManager>
     private float timePassedSinceLastSpawn = 0f;
     private float randomizedTimeToSpawn = float.MaxValue;
 
-    private int waveCount = 0;
-    private int enemiesCount = 0;
+    public int WaveCount = 0;
+    public int EnemiesCount = 0;
 
     private bool gameEnded = false;
 
@@ -45,9 +45,9 @@ public class GameManager : StaticInstance<GameManager>
         }
     }
 
-    private void SetRandomizedTimeToSpawn()
+    public void SetRandomizedTimeToSpawn()
     {
-        if (waveCount == GameSystem.Instance.LoadedLevelConfig.WavesCount)
+        if (WaveCount == GameSystem.Instance.LoadedLevelConfig.WavesCount)
         {
             randomizedTimeToSpawn = float.MaxValue;
         }
@@ -57,14 +57,18 @@ public class GameManager : StaticInstance<GameManager>
         }
     }
 
-    private void SetLevelProgressText()
+    public void SetLevelProgressText()
     {
-        LevelProgressText.text = "Level " + GameSystem.Instance.CurrentLevelNumber + " / Wave: " + waveCount;
+        LevelProgressText.text = "Level " + GameSystem.Instance.CurrentLevelNumber + " / Wave: " + WaveCount;
     }
 
     private void SpawnWave()
     {
-        waveCount++;
+        if (WaveCount >= GameSystem.Instance.LoadedLevelConfig.WavesCount)
+        {
+            return;
+        }
+        WaveCount++;
 
         int randomizedSpawnAmount = Random.Range(GameSystem.Instance.LoadedLevelConfig.SpawnAmountMin, GameSystem.Instance.LoadedLevelConfig.SpawnAmountMax+1);
 
@@ -72,13 +76,13 @@ public class GameManager : StaticInstance<GameManager>
 
         //check spawn abomination
         if (GameSystem.Instance.LoadedLevelConfig.AbominationFrequency > 0 &&
-            waveCount % GameSystem.Instance.LoadedLevelConfig.AbominationFrequency == 0)
+            WaveCount % GameSystem.Instance.LoadedLevelConfig.AbominationFrequency == 0)
         {
             int spawnIndex = Random.Range(0, spawnPointIndexes.Count);
             SpawnPoints[spawnPointIndexes[spawnIndex]].SpawnEnemy(EnemyType.Abomination);
             spawnPointIndexes.RemoveAt(spawnIndex);
 
-            enemiesCount++;
+            EnemiesCount++;
             randomizedSpawnAmount--;
         }
 
@@ -89,15 +93,15 @@ public class GameManager : StaticInstance<GameManager>
             SpawnPoints[spawnPointIndexes[spawnIndex]].SpawnEnemy(EnemyType.Ghoul);
             spawnPointIndexes.RemoveAt(spawnIndex);
 
-            enemiesCount++;
+            EnemiesCount++;
         }
     }
 
     public void NotifyEnemyDestroyed()
     {
-        enemiesCount--;
+        EnemiesCount--;
 
-        if (enemiesCount == 0 && waveCount == GameSystem.Instance.LoadedLevelConfig.WavesCount)
+        if (EnemiesCount == 0 && WaveCount == GameSystem.Instance.LoadedLevelConfig.WavesCount)
         {
             StartEndGameFlow();
         }
