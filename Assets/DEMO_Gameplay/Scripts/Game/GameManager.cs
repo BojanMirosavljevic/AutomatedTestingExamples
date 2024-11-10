@@ -1,26 +1,28 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : StaticInstance<GameManager>
 {
     public PlayerController Player;
     public Transform Environment;
-    public List<SpawnPoint> SpawnPoints;
-    public GameObject GameEndedUI;
+
+    [SerializeField] private List<SpawnPoint> SpawnPoints;
+    [SerializeField] private GameObject GameEndedUI;
+    [SerializeField] private TextMeshProUGUI LevelProgressText;
 
     private float timePassedSinceLastSpawn = 0f;
-
     private float randomizedTimeToSpawn = float.MaxValue;
 
     private int waveCount = 0;
     private int enemiesCount = 0;
 
     private bool gameEnded = false;
-    public bool GameWon = false;
 
     private void Start()
     {
         SetRandomizedTimeToSpawn();
+        SetLevelProgressText();
     }
 
     private void Update()
@@ -38,6 +40,8 @@ public class GameManager : StaticInstance<GameManager>
 
             timePassedSinceLastSpawn = 0f;
             SetRandomizedTimeToSpawn();
+
+            SetLevelProgressText();
         }
     }
 
@@ -53,11 +57,16 @@ public class GameManager : StaticInstance<GameManager>
         }
     }
 
+    private void SetLevelProgressText()
+    {
+        LevelProgressText.text = "Level " + GameSystem.Instance.CurrentLevelNumber + " / Wave: " + waveCount;
+    }
+
     private void SpawnWave()
     {
         waveCount++;
 
-        int randomizedSpawnAmount = Random.Range(GameSystem.Instance.LoadedLevelConfig.SpawnAmountMin, GameSystem.Instance.LoadedLevelConfig.SpawnAmountMax);
+        int randomizedSpawnAmount = Random.Range(GameSystem.Instance.LoadedLevelConfig.SpawnAmountMin, GameSystem.Instance.LoadedLevelConfig.SpawnAmountMax+1);
 
         List<int> spawnPointIndexes = new List<int>() { 0, 1, 2, 3, 4, 5 };
 
@@ -90,7 +99,6 @@ public class GameManager : StaticInstance<GameManager>
 
         if (enemiesCount == 0 && waveCount == GameSystem.Instance.LoadedLevelConfig.WavesCount)
         {
-            GameWon = true;
             StartEndGameFlow();
         }
     }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WavesCount: 8
   SpawnAmountMin: 2
-  SpawnAmountMax: 3
+  SpawnAmountMax: 4
   SpawnTimeMin: 1
-  SpawnTimeMax: 3
+  SpawnTimeMax: 4
   AbominationFrequency: 2

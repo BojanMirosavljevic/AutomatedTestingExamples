@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f54861d8931ad4e3f982aedaeed908bb, type: 3}
   m_Name: Level5
   m_EditorClassIdentifier: 
-  WavesCount: 12
+  WavesCount: 9
   SpawnAmountMin: 3
   SpawnAmountMax: 4
   SpawnTimeMin: 1
-  SpawnTimeMax: 2
+  SpawnTimeMax: 4
   AbominationFrequency: 3

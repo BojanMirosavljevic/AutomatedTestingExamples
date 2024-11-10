@@ -3,20 +3,17 @@ using UnityEngine;
 public class GameSystem : PersistentSingleton<GameSystem>
 {
     public LevelConfig LoadedLevelConfig;
-
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
-    protected override void OnInitialize()
-    {
-        base.OnInitialize();
-    }
+    public int CurrentLevelNumber;
 
     public void RunLevel(int level)
     {
-        LoadedLevelConfig = Resources.Load<LevelConfig>("Levels/Level"+level);
+        CurrentLevelNumber = level;
+        LoadCurrentLevelConfig();
         SceneSystem.Instance.LoadScene(Scene.Game);
+    }
+
+    private void LoadCurrentLevelConfig()
+    {
+        LoadedLevelConfig = Resources.Load<LevelConfig>("Levels/Level"+CurrentLevelNumber);
     }
 }
