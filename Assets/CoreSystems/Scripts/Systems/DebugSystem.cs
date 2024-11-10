@@ -125,33 +125,5 @@ public class DebugSystem : PersistentSingleton<DebugSystem>
 
     private void SetupButtons()
     {
-        AddIntegerInputField(
-            "Input",
-            (int number) =>
-            {
-                Debug.LogError("Input: " + number);
-            },
-            true,
-            0,
-            999
-        );
-        
-        AddButton(
-            "Button Loading",
-            () =>
-            {
-                Debug.LogError("Button loading clicked");
-            },
-            sceneOnly: Scene.Menu
-        );
-
-        AddButton(
-            "Button Game",
-            () =>
-            {
-                Debug.LogError("Button game clicked");
-            },
-            sceneOnly: Scene.Game
-        );
     }
 }
