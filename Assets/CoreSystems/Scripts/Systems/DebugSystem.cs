@@ -128,6 +128,26 @@ public class DebugSystem : PersistentSingleton<DebugSystem>
     private void SetupButtons()
     {
         AddButton(
+            "Start Debug Level",
+            () =>
+            {
+                LevelConfig testConfig = new LevelConfig();
+                testConfig.WavesCount = 3;
+                testConfig.SpawnTimeMin = 0;
+                testConfig.SpawnTimeMax = 1;
+                testConfig.SpawnAmountMin = 6;
+                testConfig.SpawnAmountMax = 6;
+                testConfig.AbominationFrequency = 1;
+
+                GameSystem.Instance.LoadedLevelConfig = testConfig;
+                GameSystem.Instance.CurrentLevelNumber = 999;
+
+                SceneSystem.Instance.LoadScene(Scene.Game);
+            },
+            sceneOnly: Scene.Menu
+        );
+
+        AddButton(
             "Set Last Wave",
             () =>
             {
