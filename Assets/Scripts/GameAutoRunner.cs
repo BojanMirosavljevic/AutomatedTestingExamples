@@ -66,7 +66,7 @@ public class GameAutoRunner : MonoBehaviour
 
         if (SceneSystem.Instance.GetActiveScene() == Scene.Menu)
         {
-            GameSystem.Instance.RunLevel(currentLevel);
+            GameObject.Find("ButtonHolder").transform.GetChild(currentLevel-1).GetComponent<Button>().onClick.Invoke();
         }
     }
 
