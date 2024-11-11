@@ -19,6 +19,10 @@ public class DebugSystem : PersistentSingleton<DebugSystem>
 
     private List<GameObject> InstantiatedDebugPrefabs;
 
+    public bool OverridePlayerMovement = false;
+    public float Horizontal = 0f;
+    public float Vertical = 0f;
+
     protected override void OnInitialize()
     {
 #if !(DEVELOPMENT_BUILD || UNITY_EDITOR)
@@ -153,5 +157,21 @@ public class DebugSystem : PersistentSingleton<DebugSystem>
             },
             sceneOnly: Scene.Game
         );
+    }
+
+    public float GetAxisRaw(string axis)
+    {
+        if (OverridePlayerMovement)
+        {
+            switch (axis)
+            {
+                case "Horizontal":
+                    return Horizontal;
+                case "Vertical":
+                    return Vertical;
+            }
+        }
+
+        return Input.GetAxisRaw(axis);
     }
 }

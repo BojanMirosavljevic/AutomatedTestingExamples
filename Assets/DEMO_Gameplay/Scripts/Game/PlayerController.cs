@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,7 +20,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        inputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+        inputVector = new Vector2(InputSystem.Instance.GetAxisRaw("Horizontal"), InputSystem.Instance.GetAxisRaw("Vertical")).normalized;
     }
 
     private void FixedUpdate()

@@ -43,4 +43,12 @@ public class InputSystem : PersistentSingleton<InputSystem>
     {
         loadingScreenBlocker.SetActive(IsDisabled);
     }
+
+    public float GetAxisRaw(string axis)
+    {
+#if UNITY_EDITOR
+        return DebugSystem.Instance.GetAxisRaw(axis);
+#endif
+        return Input.GetAxisRaw(axis);
+    }
 }

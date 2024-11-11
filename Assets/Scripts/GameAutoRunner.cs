@@ -1,22 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameAutoRunner : MonoBehaviour
 {
     private int currentLevel;
+    private int maxLevel;
 
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+
+        maxLevel = Resources.LoadAll<LevelConfig>("Levels").Length;
     }
 
     public void Init(int startFromLevel = 1)
     {
+        DebugSystem.Instance.OverridePlayerMovement = true;
         currentLevel = startFromLevel;
         StartCoroutine(MainLogic());
+    }
+
+    private void OnDestroy()
+    {
+        DebugSystem.Instance.OverridePlayerMovement = false;
     }
 
     private IEnumerator MainLogic()
@@ -28,6 +38,12 @@ public class GameAutoRunner : MonoBehaviour
             yield return PlayLevel();
             yield return ExitLevel();
             yield return WaitWhileSceneLoaded(Scene.Menu);
+            if (currentLevel > maxLevel)
+            {
+                Destroy(gameObject);
+                EditorUtility.DisplayDialog("Game Tester", "Game completed successfully!", "YAY");
+                yield break;
+            }
         }
     }
 
@@ -72,6 +88,7 @@ public class GameAutoRunner : MonoBehaviour
 
         while (gameRunning)
         {
+            //find enemy to shoot
             enemies = GameObject.FindGameObjectsWithTag("Enemy")
                                 .OrderBy(x => (x.transform.position - player.transform.position).sqrMagnitude)
                                 .ToList();
@@ -80,13 +97,58 @@ public class GameAutoRunner : MonoBehaviour
             {
                 //try shoot
                 player.TryShootEnemy(enemies[0].GetComponent<Enemy>());
-                yield return new WaitForEndOfFrame();
             }
 
+            //wait for end of frame to allow enemy to be destroyed before moving
+            yield return new WaitForEndOfFrame();
+
+            //find enemy to run away from
+            enemies = GameObject.FindGameObjectsWithTag("Enemy")
+                                .OrderBy(x => (x.transform.position - player.transform.position).sqrMagnitude)
+                                .ToList();
+            
+            //if no enemy is found, move towards middle (0,0 coordinates)
+            Vector2 moveTowards = Vector2.zero;
+            int moveDirection = 1;
+
+            if (enemies != null && enemies.Count > 0)
+            {
+                moveTowards = enemies[0].transform.position;
+                moveDirection = -1;
+            }
+            
+            if (moveTowards.x > player.transform.position.x)
+            {
+                DebugSystem.Instance.Horizontal = 1f * moveDirection;
+            }
+            else if (moveTowards.x < player.transform.position.x)
+            {
+                DebugSystem.Instance.Horizontal = -1f * moveDirection;
+            }
+            else
+            {
+                DebugSystem.Instance.Horizontal = 0f;
+            }
+
+            if (moveTowards.y > player.transform.position.y)
+            {
+                DebugSystem.Instance.Vertical = 1f * moveDirection;
+            }
+            else if (moveTowards.y < player.transform.position.y)
+            {
+                DebugSystem.Instance.Vertical = -1f * moveDirection;
+            }
+            else
+            {
+                DebugSystem.Instance.Vertical = 0f;
+            }
+
+            //wait for end of frame to allow time to pass for enemies to spawn
             yield return new WaitForEndOfFrame();
         }
 
-        yield break;
+        DebugSystem.Instance.Horizontal = 0f;
+        DebugSystem.Instance.Vertical = 0f;
     }
 
     private IEnumerator ExitLevel()
