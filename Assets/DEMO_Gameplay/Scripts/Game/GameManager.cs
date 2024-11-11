@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameManager : StaticInstance<GameManager>
 {
@@ -18,6 +20,8 @@ public class GameManager : StaticInstance<GameManager>
     private int enemiesCount = 0;
 
     private bool gameEnded = false;
+
+    public event Action<bool> GameEnded;
 
     private void Start()
     {
@@ -100,10 +104,23 @@ public class GameManager : StaticInstance<GameManager>
         if (enemiesCount == 0 && waveCount == GameSystem.Instance.LoadedLevelConfig.WavesCount)
         {
             StartEndGameFlow();
+
+            //GameEnded is invoked once and then clears all actions that were subscribed
+            GameEnded?.Invoke(true);
+            GameEnded = null;
         }
     }
 
-    public void StartEndGameFlow()
+    public void NotifyPlayerCollided()
+    {
+        StartEndGameFlow();
+
+        //GameEnded is invoked once and then clears all actions that were subscribed
+        GameEnded?.Invoke(false);
+        GameEnded = null;
+    }
+
+    private void StartEndGameFlow()
     {
         if (!gameEnded)
         {

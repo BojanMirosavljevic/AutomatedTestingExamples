@@ -27,7 +27,9 @@ public class SceneSystem : PersistentSingleton<SceneSystem>
         StartCoroutine(LoadSceneAsync((int)newScene, () =>
         {
             SceneChangeEnded?.Invoke(newScene);
+            SceneChangeEnded = null;
             onSceneChanged?.Invoke();
+            onSceneChanged = null;
         }));
     }
     

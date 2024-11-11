@@ -53,13 +53,17 @@ public class PlayerController : MonoBehaviour
             yield break;
         }
 
-
-        lineRenderer.enabled = true;
-        yield return new WaitForSecondsRealtime(0.05f);
-        lineRenderer.enabled = false;
+        StartCoroutine(ShowLineRenderer());
 
         yield return AnimateCooldownIndicator();
         cooldown = true;
+    }
+
+    private IEnumerator ShowLineRenderer()
+    {
+        lineRenderer.enabled = true;
+        yield return new WaitForSecondsRealtime(0.05f);
+        lineRenderer.enabled = false;
     }
 
     IEnumerator AnimateCooldownIndicator()
@@ -68,7 +72,7 @@ public class PlayerController : MonoBehaviour
         cooldownIndicator.fillAmount = 1f;
         while (timePassed < shootCooldown)
         {
-            timePassed += Time.unscaledDeltaTime;
+            timePassed += Time.deltaTime;
 
             cooldownIndicator.fillAmount = Mathf.Lerp(1f, 0f, timePassed / shootCooldown);
             yield return new WaitForEndOfFrame();
@@ -79,7 +83,7 @@ public class PlayerController : MonoBehaviour
     {
         if (col.transform.CompareTag("Enemy"))
         {
-            GameManager.Instance.StartEndGameFlow();
+            GameManager.Instance.NotifyPlayerCollided();
         }
     }
 }
